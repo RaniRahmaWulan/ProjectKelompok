@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +28,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::Resource('/kategori', KategoriController::class);
+Route::Resource('/berita', BeritaController::class);
+

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kategori;
 use App\Models\Berita;
 use Illuminate\Http\Request;
 
@@ -40,62 +41,74 @@ class BeritaController extends Controller
             'gambar' => 'required|image|max:2048',
         ]);
 
-        $wali = new Wali();
-        $wali->nama = $request->nama;
+        $berita = new Berita();
+        $berita->judul = $request->judul;
+        $berita->desc_berita = $request->desc_berita;
+        $berita->detail_berita = $request->detail_berita;
+        $berita->nama_pembuat = $request->nama_pembuat;
+        $berita->tgl_dibuat = $request->tgl_dibuat;
         if ($request->hasFile('foto')) {
             $image = $request->file('foto');
             $name = rand(1000, 9999) . $image->getClientOriginalName();
-            $image->move('images/wali/', $name);
-            $wali->foto = $name;
+            $image->move('images/berita/', $name);
+            $berita->gambar = $name;
         }
-        $wali->id_siswa = $request->id_siswa;
-        $wali->save();
-        return redirect()->route('wali.index')
+        $berita->id_kategori = $request->id_kategori;
+        $berita->save();
+        return redirect()->route('berita.index')
             ->with('success', 'Data berhasil dibuat!');
     }
 
     public function show($id)
     {
-        $wali = Wali::findOrFail($id);
-        return view('wali.show', compact('wali'));
+        $berita = Berita::findOrFail($id);
+        return view('berita.show', compact('berita'));
     }
 
     public function edit($id)
     {
-        $wali = Wali::findOrFail($id);
-        $siswa = Siswa::all();
-        return view('wali.edit', compact('wali', 'siswa'));
+        $berita = Berita::findOrFail($id);
+        $kategori = Kategori::all();
+        return view('berita.edit', compact('berita', 'kategori'));
     }
 
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'nama' => 'required',
-            'id_siswa' => 'required',
-            'foto' => 'image|max:2048',
+            'id_kategori' => 'required|unique:walis',
+            'judul' => 'required',
+            'desc_berita' => 'required',
+            'detail_berita' => 'required',
+            'nama_pembuat' => 'required',
+            'tgl_dibuat' => 'required',
+            'gambar' => 'required|image|max:2048',
         ]);
 
-        $wali = Wali::findOrFail($id);
-        $wali->nama = $request->nama;
-        if ($request->hasFile('foto')) {
-            $wali->deleteImage(); //menghapus foto sebelum di update melalui method deleteImage di model
-            $image = $request->file('foto');
+        $berita = Berita::findOrFail($id);
+        $berita->judul = $request->judul;
+        $berita->desc_berita = $request->desc_berita;
+        $berita->detail_berita = $request->detail_berita;
+        $berita->nama_pembuat = $request->nama_pembuat;
+        $berita->tgl_dibuat = $request->tgl_dibuat;
+        if ($request->hasFile('gambar')) {
+            $berita->deleteImage(); //menghapus gambar sebelum di update melalui method deleteImage di model
+            $image = $request->file('gambar');
             $name = rand(1000, 9999) . $image->getClientOriginalName();
-            $image->move('images/wali/', $name);
-            $wali->foto = $name;
+            $image->move('images/berita/', $name);
+            $berita->gambar = $name;
         }
-        $wali->id_siswa = $request->id_siswa;
-        $wali->save();
-        return redirect()->route('wali.index')
+        $berita->id_kategori = $request->id_kategori;
+        $berita->save();
+        return redirect()->route('berita.index')
             ->with('success', 'Data berhasil dibuat!');
     }
 
     public function destroy($id)
     {
-        $wali = Wali::findOrFail($id);
-        $wali->deleteImage();
-        $wali->delete();
-        return redirect()->route('wali.index')
+        $berita = Berita::findOrFail($id);
+        $berita->deleteImage();
+        $berita->delete();
+        return redirect()->route('berita.index')
             ->with('success', 'Data berhasil dihapus!');
 
     }

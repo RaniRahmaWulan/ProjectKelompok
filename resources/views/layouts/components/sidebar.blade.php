@@ -17,7 +17,7 @@
             <br>
             <a href="{{ route('kategori.index') }}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Data Kategori</a>
            
-            <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Data Berita</a>
+            <a href="{{ route('berita.index') }}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Data Berita</a>
             </div>
         </div>
     </nav>

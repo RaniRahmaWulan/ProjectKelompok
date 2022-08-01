@@ -17,7 +17,7 @@
                             <table class="table align-middle" id="dataTable">
                                 <thead>
                                     <tr>
-                                        <td>no</td>
+                                        <th>No</th>
                                         <th>Jenis Kategori</th>
                                         <th>Action</th>
                                     </tr>

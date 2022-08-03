@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kategori;
+use App\Models\Berita;
 use Illuminate\Http\Request;
 
 class KategoriController extends Controller
@@ -18,7 +19,7 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        //menampilkan semua data dari model Jurusan
+        //menampilkan semua data dari model kategori
         $kategori = Kategori::all();
         return view('kategori.index', compact('kategori'));
     }

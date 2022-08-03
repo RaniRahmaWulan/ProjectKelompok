@@ -24,23 +24,23 @@
                                 </thead>
                                 <tbody>
                                     @php $no = 1; @endphp
-                                    @foreach ($kategori as $data)
-                                        <tr>
+                                    @foreach ({{$kategori as $data}})
+                                    <tr>
                                         <td>{{ $no++ }}</td>
-                                            <td>{{ $data->jenis_kategori }}</td>
-                                            <td>
-                                                <form action="{{ route('kategori.destroy', $data->id) }}" method="post">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <a href="{{ route('kategori.edit', $data->id) }}"
-                                                        class="btn btn-sm btn-outline-warning">Edit
-                                                    </a> |
+                                        <td>{{ $data->jenis_kategori }}</td>
+                                        <td>
+                                            <form action="{{ route('kategori.destroy', $data->id) }}" method="post">
+                                                @method('delete')
+                                                @csrf
+                                                <a href="{{ route('kategori.edit', $data->id) }}"
+                                                    class="btn btn-sm btn-outline-warning">Edit
+                                                </a> |
                                     
-                                                    <button type="submit" class="btn btn-sm btn-outline-danger"
-                                                        onclick="return confirm('Are You Sure?')">Delete</button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                                <button type="submit" class="btn btn-sm btn-outline-danger"
+                                                    onclick="return confirm('Are You Sure?')">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                     @endforeach
                                 </tbody>
                             </table>

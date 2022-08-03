@@ -13,17 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('beritas', function (Blueprint $table) {
+        Schema::create('beritas', function (Blueprint $table) 
+        {
             $table->id();
-            $table->UnsignedBigInteger('id_kategori');
             $table->string('judul');
-            $table->string('desc_berita');
-            $table->string('detail_berita');
+            $table->string('berita_detail');
+            $table->string('berita_singkat');
             $table->string('nama_pembuat');
             $table->date('tgl_dibuat');
-            $table->string('gambar');
-            $table->foreign('id_kategori')->references('id')->on('kategoris')
-            ->onDelete('cascade');
+            $table->string('foto');
+            $table->unsignedBigInteger('id_kategori');
+            // membuat fk id_kategori yang mengacu kpd field id di table kategoris
+            $table->foreign('id_kategori')->references('id')->on('kategoris')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -21,7 +21,7 @@ class BeritaController extends Controller
     {
          // memanggil data berita bersama dengan data kategori
         // yang dibuat dari method 'kategori' di model 'berita'
-        $berita = Berita::with('id_kategori')->get();
+        $berita = Berita::with('kategori')->get();
         // dd($berita);
         // return $berita;
         return view('berita.index', ['berita' => $berita]);
@@ -77,10 +77,10 @@ class BeritaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\berita  $berita
+     * @param  \App\Models\Berita  $berita
      * @return \Illuminate\Http\Response
      */
-    public function show(berita $berita)
+    public function show($id)
     {
         $berita = Berita::findOrFail($id);
         return view('berita.show', compact('berita'));
@@ -89,10 +89,10 @@ class BeritaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\berita  $berita
+     * @param  \App\Models\Berita  $berita
      * @return \Illuminate\Http\Response
      */
-    public function edit(berita $berita)
+    public function edit($id)
     {
         $berita = Berita::findOrFail($id);
         $kategori = Kategori::all();
@@ -103,10 +103,10 @@ class BeritaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\berita  $berita
+     * @param  \App\Models\Berita  $berita
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, berita $berita)
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
             'judul' => 'required',
@@ -139,7 +139,7 @@ class BeritaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\berita  $berita
+     * @param  \App\Models\Berita  $berita
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

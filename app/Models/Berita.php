@@ -8,13 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Berita extends Model
 {
     use HasFactory;
+    // field apa saja yang bisa di isi
+    public $fillable = ['judul','berita_detail','berita_singkat','nama_pembuat','tgl_dibuat','foto','id_kategori'];
 
     // membuat relasi one to one di model
-    public function kategori()
+    public function Kategori()
     {
-        // data dari model 'Berita' bisa dimiliki
-        // oleh model 'kategori' melalui 'id_kategori'
-        return $this->hasOne(Kategori::class, 'id_kategori');
+        // data dari model 'Wali' bisa dimiliki
+        // oleh model 'kategori' melalui 'id'
+        return $this->belongsTo(Kategori::class, 'id');
     }
 
     // method menampilkan image(foto)

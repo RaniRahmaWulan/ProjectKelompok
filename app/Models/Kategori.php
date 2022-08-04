@@ -17,8 +17,8 @@ class Kategori extends Model
     // membuat relasi one to one
     public function Berita()
     {
-        // data dari model 'Kategori' bisa memiliki 1 data
-        // dari model 'Berita' melalui id_siswa
-        return $this->hasOne(Berita::class, 'id');
+        // data dari model 'berita' bisa memiliki 1 data
+        // dari model 'kategori' melalui id
+        return $this->hasOne(Kategori::class, 'id');
     }
 }
